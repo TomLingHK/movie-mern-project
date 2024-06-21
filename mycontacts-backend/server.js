@@ -9,13 +9,17 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-app.use(
-    cors({
-        origin: `http://localhost:${port}`,
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type']
-    }
-))
+// Middleware for handling CORS POLICY
+// Option 1: Allow All Origins with Default of cors(*)
+app.use(cors());
+// Option 2: Allow Custom Origins
+// app.use(
+//     cors({
+//         origin: `http://localhost:${port}`,
+//         methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//         allowedHeaders: ['Content-Type']
+//     }
+// ))
 
 app.use(express.json());
 app.use("/api/contacts", require("./routes/contactsRoutes"));
