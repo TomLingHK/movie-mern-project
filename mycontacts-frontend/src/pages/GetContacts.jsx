@@ -1,9 +1,9 @@
 import React from 'react'
 
-const GetContacts = () => {
+function GetContacts() {
   return (
     <div>GetContacts</div>
   )
 }
 
-export default GetContacts
+export default GetContacts;

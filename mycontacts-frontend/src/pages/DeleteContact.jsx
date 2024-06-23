@@ -1,9 +1,9 @@
 import React from 'react'
 
-const DeleteContact = () => {
+function DeleteContact() {
   return (
     <div>DeleteContact</div>
   )
 }
 
-export default DeleteContact
+export default DeleteContact;

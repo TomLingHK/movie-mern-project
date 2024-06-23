@@ -6,7 +6,7 @@ import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 
-const Home = () => {
+function Home() {
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(false);
 

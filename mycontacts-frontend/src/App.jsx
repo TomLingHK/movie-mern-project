@@ -6,7 +6,7 @@ import DeleteContact from './pages/DeleteContact';
 import GetContacts from './pages/GetContacts';
 import ShowContact from './pages/ShowContact';
 
-const App = () => {
+function App() {
     return (
         <Routes>
             <Route path='/' element={<Home/>}/>
@@ -18,4 +18,4 @@ const App = () => {
     )
 }
 
-export default App
+export default App;
