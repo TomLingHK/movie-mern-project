@@ -30,7 +30,7 @@ const Home = () => {
                 <h1 className='text-3xl my-8'>
                     Contacts List
                 </h1>
-                <Link to='/api/contacts'>
+                <Link to='/contacts'>
                     <MdOutlineAddBox className='text-sky-800 text-4xl'/>
                 </Link>
             </div>
@@ -64,13 +64,13 @@ const Home = () => {
                                 </td>
                                 <td className='border border-slate-700 rounded-md text-center'>
                                     <div className='flex justify-center gap-x-4'>
-                                        <Link>
+                                        <Link to={`/contacts/details/${contact._id}`}>
                                             <BsInfoCircle className='text-2xl text-green-800'/>
                                         </Link>
-                                        <Link>
+                                        <Link to={`/contacts/edit/${contact._id}`}>
                                             <AiOutlineEdit className='text-2xl text-yellow-600'/>
                                         </Link>
-                                        <Link to={`/api/contacts/${contact._id}`}>
+                                        <Link to={`/contacts/delete/${contact._id}`}>
                                             <MdOutlineDelete className='text-2xl text-red-600'/>
                                         </Link>
                                     </div>
