@@ -8,6 +8,7 @@ function CreateMovie() {
     const [name, setName] = useState('');
     const [director, setDirector] = useState('');
     const [year, setYear] = useState('');
+    const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const handleSaveMovie = () => {
@@ -15,6 +16,7 @@ function CreateMovie() {
             name,
             director,
             year,
+            description
         };
         setLoading(true);
         axios
@@ -61,6 +63,15 @@ function CreateMovie() {
                         value={year}
                         onChange={(e) => setYear(e.target.value)}
                         className='border-2 border-gray-500 px-4 py-2 w-full'
+                    />
+                </div>
+                <div className='my-4' >
+                    <label className='text-xl mr-4 text-gray-500'>Description</label>
+                    <textarea 
+                        type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        className='border-2 border-gray-500 px-4 py-2 w-full h-48 text-xl rounded-2xl'
                     />
                 </div>
                 <button className='p-2 bg-sky-300 m-8' onClick={handleSaveMovie}>

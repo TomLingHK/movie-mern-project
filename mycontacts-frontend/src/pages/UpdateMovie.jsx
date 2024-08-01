@@ -8,6 +8,7 @@ function UpdateMovie() {
     const [name, setName] = useState('');
     const [director, setDirector] = useState('');
     const [year, setYear] = useState('');
+    const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const {id} = useParams();
@@ -19,6 +20,7 @@ function UpdateMovie() {
             setName(response.data.name);
             setDirector(response.data.director);
             setYear(response.data.year);
+            setDescription(response.data.description);
             setLoading(false);
         })
         .catch((error) => {
@@ -33,6 +35,7 @@ function UpdateMovie() {
             name,
             director,
             year,
+            description
         };
         setLoading(true);
         axios
@@ -60,7 +63,7 @@ function UpdateMovie() {
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className='border-2 border-gray-500 px-4 py-2 w-full'
+                        className='border-2 border-gray-500 px-4 py-2 w-full rounded-xl'
                     />
                 </div>
                 <div className='my-4'>
@@ -69,7 +72,7 @@ function UpdateMovie() {
                         type="text"
                         value={director}
                         onChange={(e) => setDirector(e.target.value)}
-                        className='border-2 border-gray-500 px-4 py-2 w-full'
+                        className='border-2 border-gray-500 px-4 py-2 w-full rounded-xl'
                     />
                 </div>
                 <div className='my-4'>
@@ -78,7 +81,16 @@ function UpdateMovie() {
                         type="text"
                         value={year}
                         onChange={(e) => setYear(e.target.value)}
-                        className='border-2 border-gray-500 px-4 py-2 w-full'
+                        className='border-2 border-gray-500 px-4 py-2 w-full rounded-xl'
+                    />
+                </div>
+                <div className='my-4' >
+                    <label className='text-xl mr-4 text-gray-500'>Description</label>
+                    <textarea 
+                        type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        className='border-2 border-gray-500 px-4 py-2 w-full h-48 text-xl rounded-2xl'
                     />
                 </div>
                 <button className='p-2 bg-sky-300 m-8' onClick={handleUpdateMovie}>

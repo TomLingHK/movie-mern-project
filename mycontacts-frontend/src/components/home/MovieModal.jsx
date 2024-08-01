@@ -30,11 +30,16 @@ function MovieModal({ movie, onClose }) {
                 </div>
                 <p className="mt-4">Details for this movie</p>
                 <p className="my-2">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Praesentium numquam distinctio earum maiores consequatur?
-                    Neque rem distinctio illum est labore natus, ad nesciunt
-                    voluptate ducimus corporis cum aperiam quis ipsam, eligendi
-                    ratione eaque obcaecati fugiat, autem odit totam at atque!
+                    {movie?.description 
+                    ?
+                        movie.description
+                    :
+                        `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                        Praesentium numquam distinctio earum maiores consequatur?
+                        Neque rem distinctio illum est labore natus, ad nesciunt
+                        voluptate ducimus corporis cum aperiam quis ipsam, eligendi
+                        ratione eaque obcaecati fugiat, autem odit totam at atque!`
+                    }
                 </p>
             </div>
         </div>
