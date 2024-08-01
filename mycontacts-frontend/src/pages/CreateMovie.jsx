@@ -8,15 +8,18 @@ function CreateMovie() {
     const [name, setName] = useState('');
     const [director, setDirector] = useState('');
     const [year, setYear] = useState('');
+    const [imgData, setImgData] = useState('');
     const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
     const handleSaveMovie = () => {
         const data = {
             name,
             director,
             year,
-            description
+            imgData,
+            description,
         };
         setLoading(true);
         axios
@@ -30,6 +33,25 @@ function CreateMovie() {
                 alert('An error happened. Please check console.');
                 console.log(error);
             });
+    }
+
+    async function handleFileUpload(e) {
+        const file = e.target.files[0];
+        const base64 = await convertToBase64(file);
+        setImgData(base64);
+    }
+
+    function convertToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = () => {
+                resolve(fileReader.result)
+            };
+            fileReader.onerror = (error) => {
+                reject(error)
+            };
+        })
     }
 
     return (
@@ -72,6 +94,17 @@ function CreateMovie() {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         className='border-2 border-gray-500 px-4 py-2 w-full h-48 text-xl rounded-2xl'
+                    />
+                </div>
+                <img src={imgData} alt="" />
+                <div className='my-4'>
+                    <input 
+                        type="file" 
+                        label="Image"
+                        name="myFile"
+                        id="file-upload"
+                        accept=".jpeg, .png, .jpg"
+                        onChange={(e) => handleFileUpload(e)}
                     />
                 </div>
                 <button className='p-2 bg-sky-300 m-8' onClick={handleSaveMovie}>
