@@ -4,17 +4,17 @@ import { useParams } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 
-function ShowContact() {
-    const [contact, setContact] = useState([]);
+function ShowMovie() {
+    const [movie, setMovie] = useState([]);
     const [loading, setLoading] = useState(false);
     const { id } = useParams();
 
     useEffect(() =>{
         setLoading(true);
         axios
-            .get(`http://localhost:5001/api/contacts/${id}`)
+            .get(`http://localhost:5001/api/movies/${id}`)
             .then((response) => {
-                setContact(response.data);
+                setMovie(response.data);
                 setLoading(false);
             })
             .catch(error => {
@@ -26,34 +26,34 @@ function ShowContact() {
     return (
         <div className='p-4'>
             <BackButton/>
-            <h1 className='text-3xl my-4'>Show Contact</h1>
+            <h1 className='text-3xl my-4'>Show Movie</h1>
             {loading ? (
                 <Spinner/>
             ) : (
                 <div className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
                     <div className='my-4'>
                         <span className='text-xl mr-4 text-gray-500'>Id</span>
-                        <span>{contact._id}</span>
+                        <span>{movie._id}</span>
                     </div>
                     <div className='my-4'>
                         <span className='text-xl mr-4 text-gray-500'>Name</span>
-                        <span>{contact.name}</span>
+                        <span>{movie.name}</span>
                     </div>
                     <div className='my-4'>
-                        <span className='text-xl mr-4 text-gray-500'>Email</span>
-                        <span>{contact.email}</span>
+                        <span className='text-xl mr-4 text-gray-500'>Director</span>
+                        <span>{movie.director}</span>
                     </div>
                     <div className='my-4'>
-                        <span className='text-xl mr-4 text-gray-500'>Phone</span>
-                        <span>{contact.phone}</span>
+                        <span className='text-xl mr-4 text-gray-500'>Year</span>
+                        <span>{movie.year}</span>
                     </div>
                     <div className='my-4'>
                         <span className='text-xl mr-4 text-gray-500'>Create Time</span>
-                        <span>{new Date(contact.createdAt).toString()}</span>
+                        <span>{new Date(movie.createdAt).toString()}</span>
                     </div>
                     <div className='my-4'>
                         <span className='text-xl mr-4 text-gray-500'>Last Update Time</span>
-                        <span>{new Date(contact.updatedAt).toString()}</span>
+                        <span>{new Date(movie.updatedAt).toString()}</span>
                     </div>
                 </div>
             )}
@@ -61,4 +61,4 @@ function ShowContact() {
     )
 }
 
-export default ShowContact;
+export default ShowMovie;

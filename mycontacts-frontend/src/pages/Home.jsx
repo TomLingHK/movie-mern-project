@@ -3,20 +3,20 @@ import axios from "axios";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
-import ContactsTable from "../components/home/ContactsTable";
-import ContactsCard from "../components/home/ContactsCard";
+import MoviesTable from "../components/home/MoviesTable";
+import MoviesCard from "../components/home/MoviesCard";
 
 function Home() {
-    const [contacts, setContacts] = useState([]);
+    const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showType, setShowType] = useState('table');
 
     useEffect(() => {
         setLoading(true);
         axios
-            .get("http://localhost:5001/api/contacts")
+            .get("http://localhost:5001/api/movies")
             .then((response) => {
-                setContacts(response.data);
+                setMovies(response.data);
                 setLoading(false);
             })
             .catch((error) => {
@@ -42,17 +42,17 @@ function Home() {
                 </button>
             </div>
             <div className="flex justify-between items-center">
-                <h1 className="text-3xl my-8">Contacts List</h1>
-                <Link to="/contacts">
+                <h1 className="text-3xl my-8">Movies List</h1>
+                <Link to="/movies">
                     <MdOutlineAddBox className="text-sky-800 text-4xl" />
                 </Link>
             </div>
             {loading ? (
                 <Spinner />
             ) : showType === "table" ? (
-                <ContactsTable contacts={contacts} />
+                <MoviesTable movies={movies} />
             ) : (
-                <ContactsCard contacts={contacts} />
+                <MoviesCard movies={movies} />
             )}
         </div>
     );

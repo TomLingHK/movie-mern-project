@@ -4,21 +4,21 @@ import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
-function UpdateContact() {
+function UpdateMovie() {
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [director, setDirector] = useState('');
+    const [year, setYear] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const {id} = useParams();
     useEffect(() => {
     setLoading(true);
     axios
-        .get(`http://localhost:5001/api/contacts/${id}`)
+        .get(`http://localhost:5001/api/movies/${id}`)
         .then((response) => {
             setName(response.data.name);
-            setEmail(response.data.email);
-            setPhone(response.data.phone);
+            setDirector(response.data.director);
+            setYear(response.data.year);
             setLoading(false);
         })
         .catch((error) => {
@@ -28,15 +28,15 @@ function UpdateContact() {
         })
     }, [])
     
-    const handleUpdateContact = () => {
+    const handleUpdateMovie = () => {
         const data = {
             name,
-            email,
-            phone,
+            director,
+            year,
         };
         setLoading(true);
         axios
-            .put(`http://localhost:5001/api/contacts/${id}`, data)
+            .put(`http://localhost:5001/api/movies/${id}`, data)
             .then(() => {
                 setLoading(false);
                 navigate('/');
@@ -51,7 +51,7 @@ function UpdateContact() {
     return (
         <div className='p-4'>
             <BackButton/>
-            <h1 className='text-3xl my-4'>Update Contact</h1>
+            <h1 className='text-3xl my-4'>Update Movie</h1>
             {loading ? <Spinner/> : ''}
             <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
                 <div className='my-4'>
@@ -64,24 +64,24 @@ function UpdateContact() {
                     />
                 </div>
                 <div className='my-4'>
-                    <label className='text-xl mr-4 text-gray-500'>Email</label>
+                    <label className='text-xl mr-4 text-gray-500'>Director</label>
                     <input 
                         type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={director}
+                        onChange={(e) => setDirector(e.target.value)}
                         className='border-2 border-gray-500 px-4 py-2 w-full'
                     />
                 </div>
                 <div className='my-4'>
-                    <label className='text-xl mr-4 text-gray-500'>Phone</label>
+                    <label className='text-xl mr-4 text-gray-500'>Year</label>
                     <input 
                         type="text"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        value={year}
+                        onChange={(e) => setYear(e.target.value)}
                         className='border-2 border-gray-500 px-4 py-2 w-full'
                     />
                 </div>
-                <button className='p-2 bg-sky-300 m-8' onClick={handleUpdateContact}>
+                <button className='p-2 bg-sky-300 m-8' onClick={handleUpdateMovie}>
                     Save
                 </button>
             </div>
@@ -89,4 +89,4 @@ function UpdateContact() {
     )
 }
 
-export default UpdateContact;
+export default UpdateMovie;

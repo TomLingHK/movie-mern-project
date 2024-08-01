@@ -2,7 +2,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { PiBookOpenTextLight } from "react-icons/pi";
 import { BiUserCircle } from "react-icons/bi";
 
-function ContactModal({ contact, onClose }) {
+function MovieModal({ movie, onClose }) {
     return (
         <div
             className="fixed bg-black bg-opacity-60 top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center"
@@ -17,18 +17,18 @@ function ContactModal({ contact, onClose }) {
                     onClick={onClose}
                 />
                 <h2 className="w-fit px-4 py-1 bg-red-300 rounded-lg">
-                    {contact.name}
+                    {movie.name}
                 </h2>
-                <h4 className="mx-1 my-2 text-gray-500">{contact._id}</h4>
+                <h4 className="mx-1 my-2 text-gray-500">{movie._id}</h4>
                 <div className="mx-1 flex justify-start items-center gap-x-2">
                     <BiUserCircle className="text-red-300 text-2xl" />
-                    <h2 className="my-1">{contact.email}</h2>
+                    <h2 className="my-1">{movie.director}</h2>
                 </div>
                 <div className="mx-1 flex justify-start items-center gap-x-2">
                     <PiBookOpenTextLight className="text-red-300 text-2xl" />
-                    <h2 className="my-1">{contact.phone}</h2>
+                    <h2 className="my-1">{movie.year}</h2>
                 </div>
-                <p className="mt-4">Details for this contact</p>
+                <p className="mt-4">Details for this movie</p>
                 <p className="my-2">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Praesentium numquam distinctio earum maiores consequatur?
@@ -41,4 +41,4 @@ function ContactModal({ contact, onClose }) {
     );
 }
 
-export default ContactModal;
+export default MovieModal;
