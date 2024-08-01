@@ -16,6 +16,10 @@ const movieSchema = mongoose.Schema({
     },
     imgData: {
         type: String,
+    },
+    description: {
+        type: String,
+        maxLength: 400,
     }
 }, {
     timestamps: true,

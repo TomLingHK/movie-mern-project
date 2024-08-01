@@ -14,7 +14,7 @@ const getMovies = asyncHandler(async (req, res) => {
 //@route POST /api/movies
 //@access private
 const createMovie = asyncHandler(async (req, res) => {
-    const {name, director, year} = req.body;
+    const {name, director, year, description} = req.body;
     if (!name || !director || !year) {
         res.status(400);
         throw new Error("All fields are mandatory");
@@ -23,6 +23,7 @@ const createMovie = asyncHandler(async (req, res) => {
         name,
         director,
         year,
+        description,
         // user_id: req.user.id
     });
     res.status(201).json(movie);
