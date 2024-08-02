@@ -58,7 +58,19 @@ function UpdateMovie() {
     async function handleFileUpload(e) {
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
+        const fileSize = bytesToMB(file.size);
+
+        if (fileSize >= 5) {
+            alert("Please select an image smaller than 5KB!");
+            return;
+        }
+
         setImgData(base64);
+
+        function bytesToMB(bytes) {
+            return (bytes / (1024 * 1024)).toFixed(2);
+            // return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+        }
     }
 
     function convertToBase64(file) {
