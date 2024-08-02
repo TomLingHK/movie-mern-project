@@ -41,7 +41,7 @@ function CreateMovie() {
         const fileSizeInMb = bytesToMB(file.size);
 
         if (fileSizeInMb >= 5) {
-            alert("Please select an image smaller than 5KB!");
+            alert("Please select an image smaller than 5MB!");
             return;
         }
 
