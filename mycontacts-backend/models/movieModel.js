@@ -11,7 +11,7 @@ const movieSchema = mongoose.Schema({
         required: [true, "Please add the director of the movie"],
     },
     year: {
-        type: Number,
+        type: String,
         required: [true, "Please add the year of publish"],
     },
     imgData: {
