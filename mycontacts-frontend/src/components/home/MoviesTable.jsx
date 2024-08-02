@@ -10,16 +10,16 @@ function MoviesTable({ movies, setMovies }) {
         if (!movies || !$sortType || !allowedSortType.includes($sortType)) return;
 
         const newMovieOrders = JSON.parse(JSON.stringify(movies));
-        sortMoviesByType(newMovieOrders);
+        sortMoviesByType();
         setMovies(newMovieOrders);
 
-        function sortMoviesByType(movies) {
+        function sortMoviesByType() {
             if ($sortType === 'year'){
-                movies.sort(function(a, b) { return a[$sortType] - b[$sortType] });
+                newMovieOrders.sort(function(a, b) { return a[$sortType] - b[$sortType] });
                 return;
             }
 
-            movies.sort(function(a, b) {
+            newMovieOrders.sort(function(a, b) {
                 let x = a[$sortType].toLowerCase();
                 let y = b[$sortType].toLowerCase();
                 if (x < y) {return -1;}

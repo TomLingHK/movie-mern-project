@@ -38,9 +38,9 @@ function CreateMovie() {
     async function handleFileUpload(e) {
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
-        const fileSize = bytesToMB(file.size);
+        const fileSizeInMb = bytesToMB(file.size);
 
-        if (fileSize >= 5) {
+        if (fileSizeInMb >= 5) {
             alert("Please select an image smaller than 5KB!");
             return;
         }
