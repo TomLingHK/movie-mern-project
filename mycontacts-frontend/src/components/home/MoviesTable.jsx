@@ -1,17 +1,27 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineDelete } from 'react-icons/md';
 
 function MoviesTable({ movies, setMovies }) {
+    const [curSortedType, setCurSortedType] = useState("");
+
     function onSortClick($sortType) {
-        const allowedSortType = ["name", "director", "year"];
+        const allowedSortType = ["name", "director", "year"],
+              newMovieOrders = JSON.parse(JSON.stringify(movies));
 
         if (!movies || !$sortType || !allowedSortType.includes($sortType)) return;
 
-        const newMovieOrders = JSON.parse(JSON.stringify(movies));
+        if (curSortedType != "" && curSortedType === $sortType) {
+            newMovieOrders.reverse();
+            setMovies(newMovieOrders);
+            return;
+        }
+
         sortMoviesByType();
         setMovies(newMovieOrders);
+        setCurSortedType($sortType);
 
         function sortMoviesByType() {
             if ($sortType === 'year'){
