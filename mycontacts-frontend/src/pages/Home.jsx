@@ -50,7 +50,7 @@ function Home() {
             {loading ? (
                 <Spinner />
             ) : showType === "table" ? (
-                <MoviesTable movies={movies} />
+                <MoviesTable movies={movies} setMovies={setMovies}/>
             ) : (
                 <MoviesCard movies={movies} />
             )}

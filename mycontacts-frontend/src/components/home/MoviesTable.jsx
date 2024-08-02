@@ -3,15 +3,40 @@ import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineDelete } from 'react-icons/md';
 
-function MoviesTable({ movies }) {
+function MoviesTable({ movies, setMovies }) {
+    function onSortClick($sortType) {
+        const allowedSortType = ["name", "director", "year"];
+
+        if (!movies || !$sortType || !allowedSortType.includes($sortType)) return;
+
+        const newMovieOrders = JSON.parse(JSON.stringify(movies));
+        sortMoviesByType(newMovieOrders);
+        setMovies(newMovieOrders);
+
+        function sortMoviesByType(movies) {
+            if ($sortType === 'year'){
+                movies.sort(function(a, b) { return a[$sortType] - b[$sortType] });
+                return;
+            }
+
+            movies.sort(function(a, b) {
+                let x = a[$sortType].toLowerCase();
+                let y = b[$sortType].toLowerCase();
+                if (x < y) {return -1;}
+                if (x > y) {return 1;}
+                return 0;
+            })
+        }
+    }
+
     return (
         <table className='w-full border-separate border-spacing-2'>
             <thead>
                 <tr>
                     <th className='border border-slate-600 rounded-md'>No</th>
-                    <th className='border border-slate-600 rounded-md'>Name</th>
-                    <th className='border border-slate-600 rounded-md'>Director</th>
-                    <th className='border border-slate-600 rounded-md'>Year</th>
+                    <th className='border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('name') }>Name</th>
+                    <th className='border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('director') }>Director</th>
+                    <th className='border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('year') }>Year</th>
                     <th className='border border-slate-600 rounded-md'>Operations</th>
                 </tr>
             </thead>
