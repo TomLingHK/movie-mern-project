@@ -9,9 +9,26 @@ import MovieModal from './MovieModal';
 
 function MovieSingleCard({ movie }) {
     const [showModal, setShowModal] = useState(false);
+    const [hover, setHover] = useState(false);
+
+    const getBgStyle = () => {
+        const backGroundStyle = hover ? 
+            `linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url(${movie.imgData})` : 
+            `linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url(${movie.imgData})`;
+        
+        return {
+            backgroundImage: backGroundStyle, 
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'top'
+        };
+    }
 
     return (            
         <div
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            style={getBgStyle()}
             className="border-2 border-gray-500 rounded-lg px04 py-2 m-4 relative hover:shadow-xl"
         >
             <h2 className="m-2 top-1 right-2 px-4 py-1 bg-red-300 rounded-lg">
