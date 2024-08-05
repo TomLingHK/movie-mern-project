@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import MovieForm from '../components/home/MovieForm';
+import Credit from '../components/home/Credit';
 
 function UpdateMovie() {
     const [name, setName] = useState('');
@@ -75,6 +76,7 @@ function UpdateMovie() {
                 setImgData={setImgData}
                 onSaveFormClick={handleUpdateMovie}
             />
+            <Credit/>
         </div>
     )
 }

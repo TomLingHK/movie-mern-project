@@ -1,6 +1,9 @@
 import React from 'react'
+import GenreCheckbox from './GenreCheckbox';
 
 function MovieForm({ name, setName, director, setDirector, year, setYear, description, setDescription, imgData, setImgData, onSaveFormClick }) {
+    const genreArr = ['Comedy', 'Sci-Fic', 'Action', "Animation", "Romance"];
+
     async function handleFileUpload(e) {
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
@@ -57,6 +60,12 @@ function MovieForm({ name, setName, director, setDirector, year, setYear, descri
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
                     className='border-2 border-gray-500 px-4 py-2 w-full' />
+            </div>
+            <div className='my-4'>
+                <label className='text-xl mr-4 text-gray-500'>Genre</label>
+                <div className='flex flex-row flex-wrap justify-between'>
+                    {genreArr.map(genre => <GenreCheckbox key={genre} GenreType={genre}/>)}
+                </div>
             </div>
             <div className='my-4'>
                 <label className='text-xl mr-4 text-gray-500'>Description</label>
