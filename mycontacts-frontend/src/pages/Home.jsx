@@ -4,7 +4,7 @@ import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import MoviesTable from "../components/home/MoviesTable";
-import MoviesCard from "../components/home/MoviesCard";
+import MovieCards from "../components/home/MovieCards";
 
 function Home() {
     const [movies, setMovies] = useState([]);
@@ -52,7 +52,7 @@ function Home() {
             ) : showType === "table" ? (
                 <MoviesTable movies={movies} setMovies={setMovies}/>
             ) : (
-                <MoviesCard movies={movies} />
+                <MovieCards movies={movies} />
             )}
         </div>
     );

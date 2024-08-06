@@ -13,8 +13,8 @@ function MovieSingleCard({ movie }) {
 
     const getBgStyle = () => {
         const backGroundStyle = hover ? 
-            `linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url(${movie.imgData})` : 
-            `linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url(${movie.imgData})`;
+            `linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,.3)), url(${movie.imgData})` : 
+            `linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.7)), url(${movie.imgData})`;
         
         return {
             backgroundImage: backGroundStyle, 

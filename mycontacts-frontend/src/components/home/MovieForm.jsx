@@ -2,7 +2,7 @@ import React from 'react'
 import GenreCheckbox from './GenreCheckbox';
 
 function MovieForm({ name, setName, director, setDirector, year, setYear, selectedGenre, setSelectedGenre, description, setDescription, imgData, setImgData, onSaveFormClick }) {
-    const genreArr = ['Action', 'Animation', 'Comedy', "Romance", "Sci-Fic"];
+    const genreArr = ["Action", "Adventure", "Animation", "Comedy", "Fantasy", "Horror", "Romance", "Sci-Fic"];
 
     async function handleFileUpload(e) {
         const file = e.target.files[0];
@@ -63,7 +63,7 @@ function MovieForm({ name, setName, director, setDirector, year, setYear, select
             </div>
             <div className='my-4'>
                 <label className='text-xl mr-4 text-gray-500'>Genre</label>
-                <div className='flex flex-row flex-wrap justify-between'>
+                <div className='flex flex-row flex-wrap justify-start'>
                     {genreArr.map(genre => <GenreCheckbox key={genre} GenreType={genre} selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre}/>)}
                 </div>
             </div>

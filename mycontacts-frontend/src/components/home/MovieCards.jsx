@@ -1,6 +1,6 @@
 import MovieSingleCard from "./MovieSingleCard";
 
-function MoviesCard({ movies }) {
+function MovieCards({ movies }) {
   return (
     <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {movies.map((movie) => 
@@ -10,4 +10,4 @@ function MoviesCard({ movies }) {
   )
 }
 
-export default MoviesCard;
+export default MovieCards;
