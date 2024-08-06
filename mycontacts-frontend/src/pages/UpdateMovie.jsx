@@ -11,6 +11,7 @@ function UpdateMovie() {
     const [name, setName] = useState('');
     const [director, setDirector] = useState('');
     const [year, setYear] = useState('');
+    const [selectedGenre, setSelectedGenre] = useState([]);
     const [imgData, setImgData] = useState('');
     const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(false);
@@ -25,6 +26,7 @@ function UpdateMovie() {
                 setName(response.data.name);
                 setDirector(response.data.director);
                 setYear(response.data.year);
+                setSelectedGenre(response.data.genre);
                 setImgData(response.data.imgData);
                 setDescription(response.data.description);
                 setLoading(false);
@@ -41,6 +43,7 @@ function UpdateMovie() {
             name,
             director,
             year,
+            genre: selectedGenre,
             imgData,
             description,
         };
@@ -70,6 +73,8 @@ function UpdateMovie() {
                 setDirector={setDirector}
                 year={year}
                 setYear={setYear}
+                selectedGenre={selectedGenre}
+                setSelectedGenre={setSelectedGenre}
                 description={description}
                 setDescription={setDescription}
                 imgData={imgData}

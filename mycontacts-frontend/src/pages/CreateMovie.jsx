@@ -11,6 +11,7 @@ function CreateMovie() {
     const [name, setName] = useState('');
     const [director, setDirector] = useState('');
     const [year, setYear] = useState('');
+    const [selectedGenre, setSelectedGenre] = useState([]);
     const [imgData, setImgData] = useState('');
     const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(false);
@@ -21,6 +22,7 @@ function CreateMovie() {
             name,
             director,
             year,
+            genre: selectedGenre,
             imgData,
             description,
         };
@@ -50,6 +52,8 @@ function CreateMovie() {
                 setDirector={setDirector}
                 year={year}
                 setYear={setYear}
+                selectedGenre={selectedGenre}
+                setSelectedGenre={setSelectedGenre}
                 description={description}
                 setDescription={setDescription}
                 imgData={imgData}
