@@ -42,7 +42,7 @@ function Home() {
                 </button>
             </div>
             <div className="flex justify-between items-center">
-                <h1 className="text-3xl my-8">Movies List</h1>
+                <h1 className="text-2xl my-6">Movies List</h1>
                 <Link to="/movies">
                     <MdOutlineAddBox className="text-sky-800 text-4xl" />
                 </Link>

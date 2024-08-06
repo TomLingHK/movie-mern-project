@@ -25,14 +25,14 @@ function GenreCheckbox({GenreType, selectedGenre, setSelectedGenre}) {
     }
 
     return (
-        <div className='relative m-[2%] w-28 h-28 aspect-square bg-teal-600 rounded-xl hover:bg-teal-400 cursor-pointer'>
+        <div className='relative m-[1.1%] w-32 h-32 max-md:h-36 max-md:w-36 aspect-square bg-teal-500 rounded-xl hover:bg-teal-300 cursor-pointer'>
             <input 
                 id={GenreType} 
                 type="checkbox" 
                 checked={checked}
                 onChange={updateChangeStatus}
                 name={GenreType} 
-                className='relative h-full w-full appearance-none rounded-xl cursor-pointer checked:bg-gradient-to-r checked:from-teal-300 checked:to-blue-500'
+                className='section-box relative h-full w-full appearance-none rounded-xl cursor-pointer checked:bg-gradient-to-r checked:from-teal-300 checked:to-blue-500 border-2 border-solid border-teal-300 checked:border-0'
             />
             <label className='absolute bottom-2 left-[50%] -translate-x-1/2 text-white flex justify-center content-center flex-col cursor-pointer' htmlFor={GenreType}>
                 {checked 
