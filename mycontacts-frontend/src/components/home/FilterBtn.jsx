@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function FilterBtn({ type, curFilterArr, setCurFilterArr}) {
+function FilterBtn({ type, curFilterArr, setCurFilterArr }) {
     const [isActive, setIsActive] = useState(false)
 
     useEffect(() => {
@@ -8,8 +8,26 @@ function FilterBtn({ type, curFilterArr, setCurFilterArr}) {
     }, [curFilterArr])
 
     function onFilterClick() {
-        const newCurFilterArr = [...curFilterArr];
+        let newCurFilterArr = [...curFilterArr];
         const curFilterIsAll = newCurFilterArr.length === 1 && type === 'All';
+        
+        /*
+            Case 1: All => Click a => ['a']
+
+            Case 2: a => Click All => ['All']
+
+            Case 3(add): a => Click b => [a, b]
+            
+            Case 4(remove): a, b => Click b => [a]
+
+            Case 5(remove): a => Click a => ['All']
+        */
+
+        if (type === 'All') {
+            newCurFilterArr = ['All'];
+            setCurFilterArr(newCurFilterArr);
+            return;
+        }
 
         if (!!curFilterArr.includes(type)) {
             if (curFilterIsAll) return;
@@ -36,7 +54,7 @@ function FilterBtn({ type, curFilterArr, setCurFilterArr}) {
     return (
         <div 
             onClick={onFilterClick}
-            className={`px-4 py-1 rounded-lg text-white cursor-pointer hover:bg-indigo-800 ${isActive ? 'bg-indigo-800' : 'bg-indigo-500'} `}
+            className={`px-4 py-1 rounded-lg text-white cursor-pointer select-none ${isActive ? 'bg-indigo-800' : 'bg-indigo-500'} hover:bg-indigo-800`}
         >
             {type}
         </div>

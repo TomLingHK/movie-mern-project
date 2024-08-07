@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
@@ -14,15 +14,35 @@ function Home() {
     const [loading, setLoading] = useState(false);
     const [showType, setShowType] = useState('table');
     const [curFilterArr, setCurFilterArr] = useState(['All']);
+    const filterCacheRef = useRef({
+        'All': [],
+    })
 
     const filterArr = ['All', ...genre.genreArr];
 
+// Example data
+// {
+//     "_id": "66aafd904419b38c97fa4ae2",
+//     "name": "Harry Potter and the Philosopher's Stone",
+//     "director": "Chris Columbus",
+//     "year": "2001",
+//     "createdAt": "2024-08-01T03:14:24.844Z",
+//     "updatedAt": "2024-08-06T03:31:56.789Z",
+//     "__v": 0,
+//     "description": "An orphaned boy enrolls in a school of wizardry, ....",
+//     "imgData": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD//....",
+//     "genre": [
+//         "Adventure",
+//         "Fantasy"
+//     ]
+// }
     useEffect(() => {
         setLoading(true);
         axios
             .get("http://localhost:5001/api/movies")
             .then((response) => {
                 setMovies(response.data);
+                filterCacheRef.current = { 'All': response.data };
                 setLoading(false);
             })
             .catch((error) => {
@@ -30,6 +50,39 @@ function Home() {
                 setLoading(false);
             });
     }, []);
+
+    useEffect(() => {
+        const type = curFilterArr.join('');
+        const hasCachedData = Object.keys(filterCacheRef.current).includes(type);
+        const newMoviesArr = [];
+        const allMoviesArr = filterCacheRef.current['All'];
+
+        if (!!hasCachedData) {
+            setMovies(filterCacheRef.current[curFilterArr]);
+            return;
+        }
+
+        for (let movie of allMoviesArr) {
+            let isAdd = true;
+            while (isAdd) {
+                for (let filter of curFilterArr) {
+                    if (!movie.genre.includes(filter)) {
+                        isAdd = false;
+                        break;
+                    }
+                }
+                break;
+            }
+            if (!!isAdd) newMoviesArr.push(movie);
+        }
+
+        setMovies(newMoviesArr);
+        // Prevent over caching
+        if (curFilterArr.length > 1) return;
+        filterCacheRef.current[curFilterArr] = newMoviesArr;
+// console.warn('Set cache', filterCacheRef.current);
+    }, [curFilterArr])
+    
 
     return (
         <div className="p-4">
@@ -50,7 +103,7 @@ function Home() {
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl my-6">Movies List</h1>
                 { filterArr.map( type => 
-                    <FilterBtn key={type} type={type} curFilterArr={curFilterArr} setCurFilterArr={setCurFilterArr} /> 
+                    <FilterBtn key={type} type={type} curFilterArr={curFilterArr} setCurFilterArr={setCurFilterArr} filterCacheRef={filterCacheRef} /> 
                 )}
                 <Link to="/movies">
                     <MdOutlineAddBox className="text-sky-800 text-4xl" />
