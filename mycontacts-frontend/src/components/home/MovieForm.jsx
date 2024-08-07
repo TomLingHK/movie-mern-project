@@ -1,11 +1,11 @@
 import React from 'react'
 
-import genre from '../../../public/constant/genre';
+import genre from '../../../constant/genre';
 import GenreCheckbox from './GenreCheckbox';
 import Credit from './Credit';
 
 function MovieForm({ name, setName, director, setDirector, year, setYear, selectedGenre, setSelectedGenre, description, setDescription, imgData, setImgData, onSaveFormClick }) {
-    const { genreArr } = genre;
+    const genreArr = genre.genreArr;
 
     async function handleFileUpload(e) {
         const file = e.target.files[0];

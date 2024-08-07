@@ -3,14 +3,19 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 
+import genre from "../../constant/genre";
 import Spinner from "../components/Spinner";
 import MoviesTable from "../components/home/MoviesTable";
 import MovieCards from "../components/home/MovieCards";
+import FilterBtn from "../components/home/FilterBtn";
 
 function Home() {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showType, setShowType] = useState('table');
+    const [curFilterArr, setCurFilterArr] = useState(['All']);
+
+    const filterArr = ['All', ...genre.genreArr];
 
     useEffect(() => {
         setLoading(true);
@@ -44,6 +49,9 @@ function Home() {
             </div>
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl my-6">Movies List</h1>
+                { filterArr.map( type => 
+                    <FilterBtn key={type} type={type} curFilterArr={curFilterArr} setCurFilterArr={setCurFilterArr} /> 
+                )}
                 <Link to="/movies">
                     <MdOutlineAddBox className="text-sky-800 text-4xl" />
                 </Link>
