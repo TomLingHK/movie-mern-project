@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import BackButton from '../components/BackButton';
-import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import BackButton from '../components/BackButton';
+import Spinner from '../components/Spinner';
 import MovieForm from '../components/home/MovieForm';
-import Credit from '../components/home/Credit';
 
 function CreateMovie() {
     const [name, setName] = useState('');
@@ -60,7 +59,6 @@ function CreateMovie() {
                 setImgData={setImgData}
                 onSaveFormClick={handleSaveMovie}
             />
-            <Credit/>
         </div>
     )
 }
