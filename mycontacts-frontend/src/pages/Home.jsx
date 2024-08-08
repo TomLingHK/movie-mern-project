@@ -14,11 +14,44 @@ function Home() {
     const [loading, setLoading] = useState(false);
     const [showType, setShowType] = useState('table');
     const [curFilterArr, setCurFilterArr] = useState(['All']);
+    const [curSortedType, setCurSortedType] = useState("");
     const filterCacheRef = useRef({
         'All': [],
     })
 
     const filterArr = ['All', ...genre.genreArr];
+
+    function onSortClick($sortType) {
+        const allowedSortType = ["name", "director", "year"],
+              newMovieOrders = JSON.parse(JSON.stringify(movies));
+
+        if (!movies || !$sortType || !allowedSortType.includes($sortType)) return;
+
+        if (curSortedType != "" && curSortedType === $sortType) {
+            newMovieOrders.reverse();
+            setMovies(newMovieOrders);
+            return;
+        }
+
+        sortMoviesByType();
+        setMovies(newMovieOrders);
+        setCurSortedType($sortType);
+
+        function sortMoviesByType() {
+            if ($sortType === 'year'){
+                newMovieOrders.sort(function(a, b) { return a[$sortType] - b[$sortType] });
+                return;
+            }
+
+            newMovieOrders.sort(function(a, b) {
+                let x = a[$sortType].toLowerCase();
+                let y = b[$sortType].toLowerCase();
+                if (x < y) {return -1;}
+                if (x > y) {return 1;}
+                return 0;
+            })
+        }
+    }
 
 // Example data
 // {
@@ -85,34 +118,38 @@ function Home() {
     
 
     return (
-        <div className="p-4 h-screen w-screen">
-            <div className="flex justify-center items-center gap-x-4">
-                <button
-                    className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-                    onClick={() => setShowType("table")}
-                >
-                    Table
-                </button>
-                <button
-                    className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-                    onClick={() => setShowType("card")}
-                >
-                    Card
-                </button>
+        <div className="p-4 h-screen w-screen bg-grey overflow-hidden">
+            <div className="relative w-inherit">
+                <div className="relative flex justify-center w-inherit">
+                    <button
+                        className="bg-sky-300 hover:bg-sky-600 mx-2 px-4 py-1 rounded-lg"
+                        onClick={() => setShowType("table")}
+                    >
+                        Table
+                    </button>
+                    <button
+                        className="bg-sky-300 hover:bg-sky-600 mx-2 px-4 py-1 rounded-lg"
+                        onClick={() => setShowType("card")}
+                    >
+                        Card
+                    </button>
+                </div>
+                <Link to="/movies" className="absolute top-0 right-0">
+                    <MdOutlineAddBox className="text-sky-800 text-4xl" />
+                </Link>
             </div>
             <div className="flex justify-between items-center">
-                <h1 className="text-2xl my-6">Movies List</h1>
+                <h1 className="text-2xl mx-3 my-3">Movies List</h1>
+            </div>
+            <div className="flex justify-start items-center my-1 mx-2 gap-5">
                 { filterArr.map( type => 
                     <FilterBtn key={type} type={type} curFilterArr={curFilterArr} setCurFilterArr={setCurFilterArr} filterCacheRef={filterCacheRef} /> 
                 )}
-                <Link to="/movies">
-                    <MdOutlineAddBox className="text-sky-800 text-4xl" />
-                </Link>
             </div>
             {loading ? (
                 <Spinner />
             ) : showType === "table" ? (
-                <MoviesTable movies={movies} setMovies={setMovies}/>
+                <MoviesTable movies={movies} onSortClick={onSortClick}/>
             ) : (
                 <MovieCards movies={movies} />
             )}

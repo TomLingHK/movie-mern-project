@@ -4,43 +4,9 @@ import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineDelete } from 'react-icons/md';
 
-function MoviesTable({ movies, setMovies }) {
-    const [curSortedType, setCurSortedType] = useState("");
-
-    function onSortClick($sortType) {
-        const allowedSortType = ["name", "director", "year"],
-              newMovieOrders = JSON.parse(JSON.stringify(movies));
-
-        if (!movies || !$sortType || !allowedSortType.includes($sortType)) return;
-
-        if (curSortedType != "" && curSortedType === $sortType) {
-            newMovieOrders.reverse();
-            setMovies(newMovieOrders);
-            return;
-        }
-
-        sortMoviesByType();
-        setMovies(newMovieOrders);
-        setCurSortedType($sortType);
-
-        function sortMoviesByType() {
-            if ($sortType === 'year'){
-                newMovieOrders.sort(function(a, b) { return a[$sortType] - b[$sortType] });
-                return;
-            }
-
-            newMovieOrders.sort(function(a, b) {
-                let x = a[$sortType].toLowerCase();
-                let y = b[$sortType].toLowerCase();
-                if (x < y) {return -1;}
-                if (x > y) {return 1;}
-                return 0;
-            })
-        }
-    }
-
+function MoviesTable({ movies, onSortClick }) {
     return (
-        <div className='overflow-auto h-5/6 w-full'>
+        <div className='overflow-auto h-[86%] w-full'>
             <table className='w-full border-separate border-spacing-2'>
                 <thead className='sticky top-[8px] bg-white shadow-2xl' style={{boxShadow: `0 0 8px 8px #fff`}}>
                     <tr className='bg-white'>

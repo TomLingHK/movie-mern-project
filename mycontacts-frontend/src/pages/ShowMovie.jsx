@@ -25,7 +25,7 @@ function ShowMovie() {
     }, [])
 
     return (
-        <div className='p-4'>
+        <div className='p-3'>
             <BackButton/>
             <h1 className='text-3xl my-4'>Show Movie</h1>
             {loading ? (

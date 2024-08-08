@@ -49,7 +49,7 @@ function MovieSingleCard({ movie, index, movies }) {
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
                 style={getBgStyle()}
-                className={`h-96 border-2 border-gray-500 rounded-lg px04 py-2 m-4 relative hover:shadow-xl cursor-pointer hover:scale-105 ease-in-out duration-500 ${startFadeIn ? 'startFadeIn' : ''} ${isShown ? 'opacity-1' : 'opacity-0'}`}
+                className={`h-96 border-2 border-gray-500 rounded-lg px04 py-2 my-3 mr-4 relative hover:shadow-xl cursor-pointer hover:scale-105 ease-in-out duration-500 ${startFadeIn ? 'startFadeIn' : ''} ${isShown ? 'opacity-1' : 'opacity-0'}`}
             >
                 <h2 className="m-2 top-1 right-2 px-4 py-1 bg-red-300 rounded-lg">
                     {movie.name}
