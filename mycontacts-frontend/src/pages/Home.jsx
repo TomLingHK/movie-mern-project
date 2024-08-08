@@ -8,6 +8,7 @@ import Spinner from "../components/Spinner";
 import MoviesTable from "../components/home/MoviesTable";
 import MovieCards from "../components/card/MovieCards";
 import FilterBtn from "../components/home/FilterBtn";
+import SortBtn from "../components/home/SortBtn";
 
 function Home() {
     const [movies, setMovies] = useState([]);
@@ -22,8 +23,9 @@ function Home() {
     const filterArr = ['All', ...genre.genreArr];
 
     function onSortClick($sortType) {
-        const allowedSortType = ["name", "director", "year"],
-              newMovieOrders = JSON.parse(JSON.stringify(movies));
+        const allowedSortType = ["Name", "Director", "Year"],
+              newMovieOrders = JSON.parse(JSON.stringify(movies)),
+              _sortTypeKey = $sortType.toLowerCase();
 
         if (!movies || !$sortType || !allowedSortType.includes($sortType)) return;
 
@@ -38,14 +40,14 @@ function Home() {
         setCurSortedType($sortType);
 
         function sortMoviesByType() {
-            if ($sortType === 'year'){
-                newMovieOrders.sort(function(a, b) { return a[$sortType] - b[$sortType] });
+            if (_sortTypeKey === 'year'){
+                newMovieOrders.sort(function(a, b) { return a[_sortTypeKey] - b[_sortTypeKey] });
                 return;
             }
 
             newMovieOrders.sort(function(a, b) {
-                let x = a[$sortType].toLowerCase();
-                let y = b[$sortType].toLowerCase();
+                let x = a[_sortTypeKey].toLowerCase();
+                let y = b[_sortTypeKey].toLowerCase();
                 if (x < y) {return -1;}
                 if (x > y) {return 1;}
                 return 0;
@@ -140,6 +142,7 @@ function Home() {
             </div>
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl mx-3 my-3">Movies List</h1>
+                <SortBtn curSortedType={curSortedType} />
             </div>
             <div className="flex justify-start items-center my-1 mx-2 gap-5">
             {/* <div className="flex justify-start items-center my-1 mx-2 gap-5 overflow-x-scroll overflow-y-visible"> */}
