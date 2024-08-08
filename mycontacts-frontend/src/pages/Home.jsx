@@ -17,7 +17,7 @@ function Home() {
     const [loading, setLoading] = useState(false);
     const [showType, setShowType] = useState('table');
     const [curFilterArr, setCurFilterArr] = useState(['All']);
-    const [curSortedType, setCurSortedType] = useState("");
+    const [curSortedType, setCurSortedType] = useState("Name");
     const [isAscending, setIsAscending] = useState(true);
     const filterCacheRef = useRef({
         'All': [],
@@ -47,8 +47,7 @@ function Home() {
             .get("http://localhost:5001/api/movies")
             .then((response) => {
                 const moviesArr = response.data;
-                sortMoviesByType('Name', moviesArr);
-                setCurSortedType('Name');
+                sortMoviesByType(curSortedType, moviesArr);
                 setMovies(moviesArr);
                 filterCacheRef.current = { 'All': moviesArr };
                 setLoading(false);
@@ -153,7 +152,7 @@ function Home() {
             ) : showType === "table" ? (
                 <MoviesTable movies={movies}/>
             ) : (
-                <MovieCards movies={movies} />
+                <MovieCards movies={movies} curSortedType={curSortedType} isAscending={isAscending}/>
             )}
         </div>
     );
