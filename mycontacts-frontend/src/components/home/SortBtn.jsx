@@ -8,6 +8,7 @@ import SortPopup from './SortPopup';
 function SortBtn({ movies, setMovies }) {
     const [isShowSortPopup, setIsShowSortPopup] = useState(false);
     const [curSortedType, setCurSortedType] = useState("Name");
+    const [isAscending, setIsAscending] = useState(true);
 
     const allowedSortType = sortType.sortTypeArr;
 
@@ -23,12 +24,14 @@ function SortBtn({ movies, setMovies }) {
         if (curSortedType != "" && curSortedType === $sortType) {
             newMovieOrders.reverse();
             setMovies(newMovieOrders);
+            setIsAscending(!isAscending);
             return;
         }
 
         sortMoviesByType();
         setMovies(newMovieOrders);
         setCurSortedType($sortType);
+        setIsAscending(true);
 
         function sortMoviesByType() {
             if (_sortTypeKey === 'year'){
@@ -46,14 +49,28 @@ function SortBtn({ movies, setMovies }) {
         }
     }
 
+    function getArrowStyle() {
+        const _size = '10px',
+              _direction = isAscending ? 'borderTop' : 'borderBottom';
+
+        const _style = {
+            borderLeft: _size + ' solid transparent',
+            borderRight: _size + ' solid transparent',
+        }
+
+        _style[_direction] = _size + ' solid rgb(79 70 229)';
+        return _style;
+    }
+
     return (
-        <div className='relative'>
+        <div className='relative select-none'>
             <div className='inline-block'>Sort By: </div>
             <div 
-                className='inline-block w-40 text-center cursor-pointer border border-slate-700 rounded-md m-2 bg-zinc-300'
+                className='relative inline-block w-40 text-center cursor-pointer border border-slate-700 rounded-md m-2 bg-zinc-300'
                 onClick={() => {setIsShowSortPopup(true)}}
             >
                 {curSortedType}
+                <div style={getArrowStyle()} className='absolute top-[7px] right-3 w-0 h-0'></div>
             </div>
             { isShowSortPopup && <SortPopup onSortClick={onSortClick} setIsShowSortPopup={setIsShowSortPopup} />}
         </div>
