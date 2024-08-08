@@ -6,7 +6,7 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineDelete } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 
-import MovieModal from './MovieModal';
+import MovieModal from '../home/MovieModal';
 
 
 function MovieSingleCard({ movie, index, movies }) {

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
-import MovieForm from '../components/home/MovieForm';
+import MovieForm from '../components/form/MovieForm';
 
 function CreateMovie() {
     const [name, setName] = useState('');

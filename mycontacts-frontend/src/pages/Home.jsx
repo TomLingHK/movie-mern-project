@@ -6,7 +6,7 @@ import { MdOutlineAddBox } from "react-icons/md";
 import genre from "../../constant/genre";
 import Spinner from "../components/Spinner";
 import MoviesTable from "../components/home/MoviesTable";
-import MovieCards from "../components/home/MovieCards";
+import MovieCards from "../components/card/MovieCards";
 import FilterBtn from "../components/home/FilterBtn";
 
 function Home() {
