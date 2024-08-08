@@ -142,6 +142,7 @@ function Home() {
                 <h1 className="text-2xl mx-3 my-3">Movies List</h1>
             </div>
             <div className="flex justify-start items-center my-1 mx-2 gap-5">
+            {/* <div className="flex justify-start items-center my-1 mx-2 gap-5 overflow-x-scroll overflow-y-visible"> */}
                 { filterArr.map( type => 
                     <FilterBtn key={type} type={type} curFilterArr={curFilterArr} setCurFilterArr={setCurFilterArr} filterCacheRef={filterCacheRef} /> 
                 )}
