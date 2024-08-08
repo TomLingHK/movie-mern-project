@@ -3,7 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 
+// constant
 import genre from "../../constant/genre";
+import sortType from "../../constant/sortType";
+
 import Spinner from "../components/Spinner";
 import MoviesTable from "../components/home/MoviesTable";
 import MovieCards from "../components/card/MovieCards";
@@ -21,13 +24,16 @@ function Home() {
     })
 
     const filterArr = ['All', ...genre.genreArr];
+    const allowedSortType = sortType.sortTypeArr;
 
     function onSortClick($sortType) {
-        const allowedSortType = ["Name", "Director", "Year"],
-              newMovieOrders = JSON.parse(JSON.stringify(movies)),
+        const newMovieOrders = JSON.parse(JSON.stringify(movies)),
               _sortTypeKey = $sortType.toLowerCase();
 
-        if (!movies || !$sortType || !allowedSortType.includes($sortType)) return;
+        if (!movies || !$sortType || !allowedSortType.includes($sortType)) {
+            console.error(`${$sortType} is not a valid sortType!`);
+            return;
+        }
 
         if (curSortedType != "" && curSortedType === $sortType) {
             newMovieOrders.reverse();
