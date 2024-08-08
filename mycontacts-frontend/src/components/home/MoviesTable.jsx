@@ -10,9 +10,9 @@ function MoviesTable({ movies }) {
                 <thead className='sticky top-[8px] bg-white shadow-2xl' style={{boxShadow: `0 0 8px 8px #fff`}}>
                     <tr className='bg-white'>
                         <th className='w-[5%] border border-slate-600 rounded-md'>No</th>
-                        <th className='w-[40%] border border-slate-600 rounded-md cursor-pointer'>Name</th>
-                        <th className='w-[10%] border border-slate-600 rounded-md cursor-pointer'>Director</th>
-                        <th className='w-[10%] border border-slate-600 rounded-md cursor-pointer'>Year</th>
+                        <th className='w-[40%] border border-slate-600 rounded-md'>Name</th>
+                        <th className='w-[10%] border border-slate-600 rounded-md'>Director</th>
+                        <th className='w-[10%] border border-slate-600 rounded-md'>Year</th>
                         <th className='w-[20%] border border-slate-600 rounded-md'>Operations</th>
                     </tr>
                 </thead>

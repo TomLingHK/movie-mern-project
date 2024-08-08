@@ -5,7 +5,6 @@ import { MdOutlineAddBox } from "react-icons/md";
 
 // constant
 import genre from "../../constant/genre";
-import sortType from "../../constant/sortType";
 
 import Spinner from "../components/Spinner";
 import MoviesTable from "../components/home/MoviesTable";
@@ -18,48 +17,11 @@ function Home() {
     const [loading, setLoading] = useState(false);
     const [showType, setShowType] = useState('table');
     const [curFilterArr, setCurFilterArr] = useState(['All']);
-    const [curSortedType, setCurSortedType] = useState("Name");
     const filterCacheRef = useRef({
         'All': [],
     })
 
     const filterArr = ['All', ...genre.genreArr];
-    const allowedSortType = sortType.sortTypeArr;
-
-    function onSortClick($sortType) {
-        const newMovieOrders = JSON.parse(JSON.stringify(movies)),
-              _sortTypeKey = $sortType.toLowerCase();
-
-        if (!movies || !$sortType || !allowedSortType.includes($sortType)) {
-            console.error(`${$sortType} is not a valid sortType!`);
-            return;
-        }
-
-        if (curSortedType != "" && curSortedType === $sortType) {
-            newMovieOrders.reverse();
-            setMovies(newMovieOrders);
-            return;
-        }
-
-        sortMoviesByType();
-        setMovies(newMovieOrders);
-        setCurSortedType($sortType);
-
-        function sortMoviesByType() {
-            if (_sortTypeKey === 'year'){
-                newMovieOrders.sort(function(a, b) { return a[_sortTypeKey] - b[_sortTypeKey] });
-                return;
-            }
-
-            newMovieOrders.sort(function(a, b) {
-                let x = a[_sortTypeKey].toLowerCase();
-                let y = b[_sortTypeKey].toLowerCase();
-                if (x < y) {return -1;}
-                if (x > y) {return 1;}
-                return 0;
-            })
-        }
-    }
 
 // Example data
 // {
@@ -148,7 +110,7 @@ function Home() {
             </div>
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl mx-3 my-3">Movies List</h1>
-                <SortBtn curSortedType={curSortedType} onSortClick={onSortClick} />
+                <SortBtn movies={movies} setMovies={setMovies} />
             </div>
             <div className="flex justify-start items-center my-1 mx-2 gap-5">
             {/* <div className="flex justify-start items-center my-1 mx-2 gap-5 overflow-x-scroll overflow-y-visible"> */}
