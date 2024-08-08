@@ -17,6 +17,8 @@ function Home() {
     const [loading, setLoading] = useState(false);
     const [showType, setShowType] = useState('table');
     const [curFilterArr, setCurFilterArr] = useState(['All']);
+    const [curSortedType, setCurSortedType] = useState("");
+    const [isAscending, setIsAscending] = useState(true);
     const filterCacheRef = useRef({
         'All': [],
     })
@@ -44,8 +46,11 @@ function Home() {
         axios
             .get("http://localhost:5001/api/movies")
             .then((response) => {
-                setMovies(response.data);
-                filterCacheRef.current = { 'All': response.data };
+                const moviesArr = response.data;
+                sortMoviesByType('Name', moviesArr);
+                setCurSortedType('Name');
+                setMovies(moviesArr);
+                filterCacheRef.current = { 'All': moviesArr };
                 setLoading(false);
             })
             .catch((error) => {
@@ -79,6 +84,8 @@ function Home() {
             if (!!isAdd) newMoviesArr.push(movie);
         }
 
+        sortMoviesByType(curSortedType, newMoviesArr);
+        setIsAscending(true);
         setMovies(newMoviesArr);
         // Prevent over caching
         if (curFilterArr.length > 1) return;
@@ -86,6 +93,21 @@ function Home() {
 // console.warn('Set cache', filterCacheRef.current);
     }, [curFilterArr])
     
+    function sortMoviesByType($sortType, $moviesArr) {
+        const _sortTypeKey = $sortType.toLowerCase();
+        if (_sortTypeKey === 'year'){
+            $moviesArr.sort(function(a, b) { return a[_sortTypeKey] - b[_sortTypeKey] });
+            return;
+        }
+
+        $moviesArr.sort(function(a, b) {
+            let x = a[_sortTypeKey].toLowerCase();
+            let y = b[_sortTypeKey].toLowerCase();
+            if (x < y) {return -1;}
+            if (x > y) {return 1;}
+            return 0;
+        })
+    }
 
     return (
         <div className="p-4 h-screen w-screen bg-grey overflow-hidden">
@@ -110,7 +132,15 @@ function Home() {
             </div>
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl mx-3 my-3">Movies List</h1>
-                { movies.length && <SortBtn movies={movies} setMovies={setMovies} />}
+                <SortBtn 
+                    movies={movies} 
+                    setMovies={setMovies} 
+                    sortMoviesByType={sortMoviesByType} 
+                    curSortedType={curSortedType} 
+                    setCurSortedType={setCurSortedType} 
+                    isAscending={isAscending}
+                    setIsAscending={setIsAscending}
+                />
             </div>
             <div className="flex justify-start items-center my-1 mx-2 gap-5">
             {/* <div className="flex justify-start items-center my-1 mx-2 gap-5 overflow-x-scroll overflow-y-visible"> */}

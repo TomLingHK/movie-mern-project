@@ -5,20 +5,13 @@ import sortType from "../../../constant/sortType";
 
 import SortPopup from './SortPopup';
 
-function SortBtn({ movies, setMovies }) {
+function SortBtn({ movies, setMovies, sortMoviesByType, curSortedType, setCurSortedType, isAscending, setIsAscending }) {
     const [isShowSortPopup, setIsShowSortPopup] = useState(false);
-    const [curSortedType, setCurSortedType] = useState("");
-    const [isAscending, setIsAscending] = useState(true);
 
     const allowedSortType = sortType.sortTypeArr;
 
-    useEffect(() => {
-        onSortClick('Name');
-    }, [])
-
     function onSortClick($sortType) {
-        const newMovieOrders = JSON.parse(JSON.stringify(movies)),
-              _sortTypeKey = $sortType.toLowerCase();
+        const newMovieOrders = JSON.parse(JSON.stringify(movies));
 
         if (!movies || !$sortType || !allowedSortType.includes($sortType)) {
             console.error(`${$sortType} is not a valid sortType!`);
@@ -32,25 +25,10 @@ function SortBtn({ movies, setMovies }) {
             return;
         }
 
-        sortMoviesByType();
-        setMovies(newMovieOrders);
+        sortMoviesByType($sortType, newMovieOrders);
         setCurSortedType($sortType);
+        setMovies(newMovieOrders);
         setIsAscending(true);
-
-        function sortMoviesByType() {
-            if (_sortTypeKey === 'year'){
-                newMovieOrders.sort(function(a, b) { return a[_sortTypeKey] - b[_sortTypeKey] });
-                return;
-            }
-
-            newMovieOrders.sort(function(a, b) {
-                let x = a[_sortTypeKey].toLowerCase();
-                let y = b[_sortTypeKey].toLowerCase();
-                if (x < y) {return -1;}
-                if (x > y) {return 1;}
-                return 0;
-            })
-        }
     }
 
     function getArrowStyle() {
