@@ -31,7 +31,7 @@ function MovieModal({ movie, onClose }) {
                     <PiBookOpenTextLight className="text-red-300 text-2xl" />
                     <h2 className="my-1">{movie.year}</h2>
                 </div>
-                <p className="mt-4">Details for this movie</p>
+                <p className="mt-4 text-xl">Description</p>
                 <p className="my-2">
                     {movie?.description 
                     ?
