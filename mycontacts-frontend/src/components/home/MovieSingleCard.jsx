@@ -4,12 +4,31 @@ import { BiUserCircle, BiShow } from 'react-icons/bi';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineDelete } from 'react-icons/md';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import MovieModal from './MovieModal';
 
-function MovieSingleCard({ movie }) {
+
+function MovieSingleCard({ movie, index, movies }) {
     const [showModal, setShowModal] = useState(false);
     const [hover, setHover] = useState(false);
+    const [startFadeIn, setStartFadeIn] = useState(false);
+    const [isShown, setIsShown] = useState(false);
+
+    const startFadeInDelay = index * 80;
+    const startFadeInDuration = 400;
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsShown(false);
+            setStartFadeIn(true);
+        }, startFadeInDelay);
+
+        setTimeout(() => {
+            setStartFadeIn(false);
+            setIsShown(true);
+        }, startFadeInDelay + startFadeInDuration);
+    }, [index, movies.length])
 
     function getBgStyle() {
         const backGroundStyle = hover ? 
@@ -30,7 +49,7 @@ function MovieSingleCard({ movie }) {
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
                 style={getBgStyle()}
-                className="border-2 border-gray-500 rounded-lg px04 py-2 m-4 relative hover:shadow-xl cursor-pointer hover:scale-105 ease-in-out duration-500 h-96"
+                className={`h-96 border-2 border-gray-500 rounded-lg px04 py-2 m-4 relative hover:shadow-xl cursor-pointer hover:scale-105 ease-in-out duration-500 ${startFadeIn ? 'startFadeIn' : ''} ${isShown ? 'opacity-1' : 'opacity-0'}`}
             >
                 <h2 className="m-2 top-1 right-2 px-4 py-1 bg-red-300 rounded-lg">
                     {movie.name}
