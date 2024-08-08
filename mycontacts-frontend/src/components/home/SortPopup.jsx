@@ -8,7 +8,7 @@ function SortPopup({ onSortClick, setIsShowSortPopup }) {
             {sortTypeArr.map(type => 
                 <div 
                     key={type}
-                    className="bg-zinc-300 border border-slate-700 rounded-md cursor-pointer"
+                    className="bg-zinc-300 border border-slate-700 cursor-pointer first:rounded-t-md last:rounded-b-md"
                     onClick={() => {onSortClick(type); setIsShowSortPopup(false); }}
                 >
                     {type}
