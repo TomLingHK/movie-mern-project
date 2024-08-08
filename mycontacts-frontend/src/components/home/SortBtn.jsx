@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // constant
 import sortType from "../../../constant/sortType";
@@ -7,10 +7,14 @@ import SortPopup from './SortPopup';
 
 function SortBtn({ movies, setMovies }) {
     const [isShowSortPopup, setIsShowSortPopup] = useState(false);
-    const [curSortedType, setCurSortedType] = useState("Name");
+    const [curSortedType, setCurSortedType] = useState("");
     const [isAscending, setIsAscending] = useState(true);
 
     const allowedSortType = sortType.sortTypeArr;
+
+    useEffect(() => {
+        onSortClick('Name');
+    }, [])
 
     function onSortClick($sortType) {
         const newMovieOrders = JSON.parse(JSON.stringify(movies)),

@@ -110,7 +110,7 @@ function Home() {
             </div>
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl mx-3 my-3">Movies List</h1>
-                <SortBtn movies={movies} setMovies={setMovies} />
+                { movies.length && <SortBtn movies={movies} setMovies={setMovies} />}
             </div>
             <div className="flex justify-start items-center my-1 mx-2 gap-5">
             {/* <div className="flex justify-start items-center my-1 mx-2 gap-5 overflow-x-scroll overflow-y-visible"> */}
