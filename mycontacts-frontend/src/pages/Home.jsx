@@ -18,7 +18,7 @@ function Home() {
     const [loading, setLoading] = useState(false);
     const [showType, setShowType] = useState('table');
     const [curFilterArr, setCurFilterArr] = useState(['All']);
-    const [curSortedType, setCurSortedType] = useState("");
+    const [curSortedType, setCurSortedType] = useState("Name");
     const filterCacheRef = useRef({
         'All': [],
     })
@@ -148,7 +148,7 @@ function Home() {
             </div>
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl mx-3 my-3">Movies List</h1>
-                <SortBtn curSortedType={curSortedType} />
+                <SortBtn curSortedType={curSortedType} onSortClick={onSortClick} />
             </div>
             <div className="flex justify-start items-center my-1 mx-2 gap-5">
             {/* <div className="flex justify-start items-center my-1 mx-2 gap-5 overflow-x-scroll overflow-y-visible"> */}
@@ -159,7 +159,7 @@ function Home() {
             {loading ? (
                 <Spinner />
             ) : showType === "table" ? (
-                <MoviesTable movies={movies} onSortClick={onSortClick}/>
+                <MoviesTable movies={movies}/>
             ) : (
                 <MovieCards movies={movies} />
             )}

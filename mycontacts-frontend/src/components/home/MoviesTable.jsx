@@ -3,16 +3,16 @@ import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineDelete } from 'react-icons/md';
 
-function MoviesTable({ movies, onSortClick }) {
+function MoviesTable({ movies }) {
     return (
         <div className='overflow-auto h-[86%] w-full'>
             <table className='w-full border-separate border-spacing-2'>
                 <thead className='sticky top-[8px] bg-white shadow-2xl' style={{boxShadow: `0 0 8px 8px #fff`}}>
                     <tr className='bg-white'>
                         <th className='w-[5%] border border-slate-600 rounded-md'>No</th>
-                        <th className='w-[40%] border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('Name') }>Name</th>
-                        <th className='w-[10%] border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('Director') }>Director</th>
-                        <th className='w-[10%] border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('Year') }>Year</th>
+                        <th className='w-[40%] border border-slate-600 rounded-md cursor-pointer'>Name</th>
+                        <th className='w-[10%] border border-slate-600 rounded-md cursor-pointer'>Director</th>
+                        <th className='w-[10%] border border-slate-600 rounded-md cursor-pointer'>Year</th>
                         <th className='w-[20%] border border-slate-600 rounded-md'>Operations</th>
                     </tr>
                 </thead>
