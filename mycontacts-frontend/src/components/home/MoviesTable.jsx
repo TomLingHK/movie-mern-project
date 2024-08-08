@@ -19,7 +19,7 @@ function MoviesTable({ movies, onSortClick }) {
                 </thead>
                 <tbody>
                     {movies.map((movie, index) => 
-                        <tr key={movie._id} className='h-8'>
+                        <tr key={movie._id} className='h-8 even:bg-white odd:bg-zinc-200'>
                             <td className='border border-slate-700 rounded-md text-center'>
                                 {index + 1}
                             </td>
