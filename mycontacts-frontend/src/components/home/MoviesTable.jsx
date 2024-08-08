@@ -44,11 +44,11 @@ function MoviesTable({ movies, setMovies }) {
             <table className='w-full border-separate border-spacing-2'>
                 <thead className='sticky top-[8px] bg-white shadow-2xl' style={{boxShadow: `0 0 8px 8px #fff`}}>
                     <tr className='bg-white'>
-                        <th className='border border-slate-600 rounded-md'>No</th>
-                        <th className='border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('name') }>Name</th>
-                        <th className='border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('director') }>Director</th>
-                        <th className='border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('year') }>Year</th>
-                        <th className='border border-slate-600 rounded-md'>Operations</th>
+                        <th className='w-[5%] border border-slate-600 rounded-md'>No</th>
+                        <th className='w-[40%] border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('name') }>Name</th>
+                        <th className='w-[10%] border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('director') }>Director</th>
+                        <th className='w-[10%] border border-slate-600 rounded-md cursor-pointer' onClick={ () => onSortClick('year') }>Year</th>
+                        <th className='w-[20%] border border-slate-600 rounded-md'>Operations</th>
                     </tr>
                 </thead>
                 <tbody>
