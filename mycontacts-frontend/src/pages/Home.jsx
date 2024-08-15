@@ -65,7 +65,9 @@ function Home() {
         const allMoviesArr = filterCacheRef.current['All'];
 
         if (!!hasCachedData) {
-            setMovies(filterCacheRef.current[curFilterArr]);
+            const cachedData = filterCacheRef.current[curFilterArr];
+            sortMoviesByType(curSortedType, cachedData);
+            setMovies(cachedData);
             return;
         }
 
