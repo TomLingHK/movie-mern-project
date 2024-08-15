@@ -141,8 +141,7 @@ function Home() {
                     setIsAscending={setIsAscending}
                 />
             </div>
-            <div className="flex justify-start items-center my-1 mx-2 gap-5 overflow-x-scroll">
-            {/* <div className="flex justify-start items-center my-1 mx-2 gap-5 overflow-x-scroll overflow-y-visible"> */}
+            <div className="flex justify-start items-center my-1 mx-2 gap-5 overflow-x-auto">
                 { filterArr.map( type => 
                     <FilterBtn key={type} type={type} curFilterArr={curFilterArr} setCurFilterArr={setCurFilterArr} filterCacheRef={filterCacheRef} /> 
                 )}

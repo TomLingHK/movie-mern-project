@@ -49,12 +49,16 @@ function MovieSingleCard({ movie, index, movies }) {
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
                 style={getBgStyle()}
-                className={`h-96 border-2 border-gray-500 rounded-lg px04 py-2 my-3 mr-4 relative hover:shadow-xl cursor-pointer hover:scale-105 ease-in-out duration-500 ${startFadeIn ? 'startFadeIn' : ''} ${isShown ? 'opacity-1' : 'opacity-0'}`}
+                className={`
+                    h-[32.3%] w-[49%]
+                    lg:h-[32.3%] lg:w-[32.3%]
+                    xl:h-[49%] xl:w-[19%]
+                    border-2 border-gray-500 rounded-lg px04 py-2 relative hover:shadow-xl cursor-pointer hover:scale-[1.03] ease-in-out duration-500 ${startFadeIn ? 'startFadeIn' : ''} ${isShown ? 'opacity-1' : 'opacity-0'}
+                `}
             >
                 <h2 className="m-2 top-1 right-2 px-4 py-1 bg-red-300 rounded-lg">
                     {movie.name}
                 </h2>
-                {/* <h4 className="mx-1 my-2 text-gray-500">{movie._id}</h4> */}
                 <div className="mx-1 flex justify-start items-center gap-x-2">
                     <BiUserCircle className="text-red-300 text-2xl" />
                     <h2 className="my-1">{movie.director}</h2>

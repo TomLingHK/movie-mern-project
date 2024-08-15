@@ -54,7 +54,7 @@ function FilterBtn({ type, curFilterArr, setCurFilterArr }) {
     return (
         <div 
             onClick={onFilterClick}
-            className={`w-max text-nowrap px-4 py-1 rounded-lg text-white cursor-pointer select-none ${isActive ? 'bg-indigo-500' : 'bg-indigo-800'} hover:bg-indigo-500 hover:scale-105 ease-in-out`}
+            className={`w-max text-nowrap px-4 py-1 rounded-lg text-white cursor-pointer select-none ${isActive ? 'bg-indigo-500' : 'bg-indigo-800'} hover:bg-indigo-500 hover:scale-x-105 ease-in-out`}
         >
             {type}
         </div>
