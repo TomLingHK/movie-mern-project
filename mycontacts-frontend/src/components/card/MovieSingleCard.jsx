@@ -53,7 +53,7 @@ function MovieSingleCard({ movie, index, movies }) {
                     h-[32.3%] w-[49%]
                     lg:h-[32.3%] lg:w-[32.3%]
                     xl:h-[49%] xl:w-[19%]
-                    border-2 border-gray-500 rounded-lg px04 py-2 relative hover:shadow-xl cursor-pointer hover:scale-[1.03] ease-in-out duration-500 ${startFadeIn ? 'startFadeIn' : ''} ${isShown ? 'opacity-1' : 'opacity-0'}
+                    border-2 border-gray-500 rounded-lg py-2 relative hover:shadow-xl cursor-pointer hover:scale-[1.03] ease-in-out duration-500 ${startFadeIn ? 'startFadeIn' : ''} ${isShown ? 'opacity-1' : 'opacity-0'}
                 `}
             >
                 <h2 className="m-2 top-1 right-2 px-4 py-1 bg-red-300 rounded-lg">
